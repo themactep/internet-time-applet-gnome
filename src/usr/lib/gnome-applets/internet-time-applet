@@ -1,0 +1,73 @@
+#!/usr/bin/env python
+#
+#  Swatch Internet Time applet for GNOME panel.
+#
+#  Paul Philippov <paul@ppds.ws>
+#  This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.
+#  http://creativecommons.org/licenses/by-sa/3.0/
+#
+#  Last Change: 06-Jan-2011.
+#
+
+import sys
+import pygtk
+pygtk.require('2.0')
+
+import gtk
+import gnomeapplet
+import gobject
+import gnome
+
+from datetime import timedelta, datetime
+
+Beat = 86.4
+
+class InternetTimeApplet(gnomeapplet.Applet):
+    def __init__(self, applet, iid):
+        gnome.init("Internet Time Applet", "1.0.1")
+        self.__gobject_init__()
+        self.label = gtk.Label("@---")
+        self.applet = applet
+        applet.set_background_widget(applet)
+        applet.add(self.label)
+        applet.connect("destroy", self.cleanup)
+        applet.show_all()
+        gobject.timeout_add(int(Beat * 10), self.update)
+
+    def cleanup(self):
+        del self.applet
+
+    def update(self):
+        btm_now = datetime.utcnow() + timedelta(hours = 1)
+        delta = timedelta(hours = btm_now.hour,
+                          minutes = btm_now.minute,
+                          seconds = btm_now.second,
+                          microseconds = btm_now.microsecond)
+        beats = (delta.seconds + delta.microseconds / 1000000.0) / Beat
+        self.label.set_text("@%03d" % beats)
+        return 1
+
+gobject.type_register(InternetTimeApplet)
+
+def applet_factory(applet, iid):
+    InternetTimeApplet(applet, iid)
+    return gtk.TRUE
+
+if __name__ == '__main__':
+    if len(sys.argv) > 1 and sys.argv[1] == '-d': # debugging
+        mainWindow = gtk.Window()
+        mainWindow.set_title('Applet window')
+        mainWindow.connect('destroy', gtk.main_quit)
+        applet = gnomeapplet.Applet()
+        applet_factory(applet, None)
+        applet.reparent(mainWindow)
+        mainWindow.show_all()
+        gtk.main()
+        sys.exit()
+    else:
+        gnomeapplet.bonobo_factory('OAFIID:InternetTimeApplet_Factory',
+                                   gnomeapplet.Applet.__gtype__,
+                                   'Internet Time Applet', '1.0.1',
+                                   applet_factory)
+
+# vim:set fenc=utf-8 ft=ruby et sw=2 ts=2 sts=2 nowrap

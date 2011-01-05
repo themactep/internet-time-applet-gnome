@@ -1,0 +1,53 @@
+GNOME Internet Time applet
+
+Description:
+------------
+A GNOME panel applet that dispays Swatch Internet Time in .beats.
+
+
+Pre-history:
+------------
+              Internet Time  was a decimal time concept  introduced in 1998
+              and marketed  by the  Swatch  corporation  as  an alternative,
+              decimal  measure of time.  One of  the goals  was to simplify
+              the way people in different time zones communicate about time,
+              mostly by eliminating time zones altogether.
+                                                               -- Wikipedia
+
+Several years ago I used to work for an international research company. This
+company had people from all over the world.  I know from personal experience
+how hard it is to set up a proper time for a company-wide conference call
+with many participants living in different time zones.
+
+When I first heard about the Internet Time concept, I was hit by the idea of
+the global common time. As a computer programmer, with binaries in mind, and
+a person from the part of humanity that uses metric system, I also was ready
+to adopt the concept of decimal measure of time immediately.
+
+
+Dependancies:
+-------------
+gnome, python, python-gtk2, python-gnome2, python-gnomeapplet, python-gobject
+
+
+Installation:
+-------------
+Debian/Ubuntu users can download a pre-compiles .deb file (fits all platforms).
+Other Linux flavor users should figure out something appropriate for them.
+Don't forget to send me a patch once you did. =)
+
+
+Authorship:
+-----------
+Paul Philippov <themactep@gmail.com>
+
+
+License:
+--------
+This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 Unported License.
+http://creativecommons.org/licenses/by-sa/3.0/
+
+
+Support:
+---------
+Like it? Go Flattr me: http://flattr.com/thing/112634/Swatch-Internet-Time-applet-for-GNOME

@@ -1,0 +1,10 @@
+Package: internet-time-applet
+Version: 1.0.1
+Architecture: all
+Maintainer: Paul Philippov <themactep@gmail.com>
+Depends: python-gtk2, python-gnome2, python-gnomeapplet, python-gobject
+Section: gnome
+Priority: optional
+Homepage: http://themactep.com/beats/gnome/
+Description: Swatch Internet Time applet for GNOME
+ Swatch Internet Time .beats clock applet for GNOME panel.
